@@ -5,7 +5,7 @@ from src.app import handler
 
 def test_event():
 
-    event_path = os.path.join(os.path.dirname(__file__), "event.json")
+    event_pat = os.path.join(os.path.dirname(__file__), "event.json")
 
     with open(event_path, "r", encoding="utf-8") as event_file:
         event = json.loads(event_file.read())
