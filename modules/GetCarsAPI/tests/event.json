@@ -1,5 +1,5 @@
 {
-    "body": "eyJ0ZXN0IjoiYm9keSJ9",
+    "body": "hello world",
     "resource": "/{proxy+}",
     "path": "/path/to/resource",
     "httpMethod": "POST",
