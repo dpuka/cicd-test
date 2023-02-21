@@ -1,27 +1,26 @@
 pipeline {
-    agent none
+    agent {
+        docker {
+            image 'python:3.9.16-bullseye'
+        }
+    }
+
     stages {
         stage('Lint') {
-            agent {
-                docker {
-                    image 'python:3.9.16-bullseye'
-                }
-            }
             steps {
-                sh 'pip install flake8'
-                sh 'if [ -f requirements.txt ]; then pip install -r requirements.txt; fi'
+                sh 'pip install --user flake8'
+                sh 'if [ -f requirements.txt ]; then pip install --user -r requirements.txt; fi'
                 sh 'flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics'
                 sh 'flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics'
             }
         }
         stage('Test') {
-            agent {
-                docker {
-                    image 'qnib/pytest'
-                }
-            }
             steps {
-                sh 'py.test --verbose --junit-xml test-reports/results.xml sources/test_calc.py'
+                sh 'pip install --user pytest'
+                // sh 'if [ -f requirements.txt ]; then pip install --user -r requirements_test.txt; fi'
+                sh 'flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics'
+                sh 'flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics'
+                sh 'pytest --verbose --junit-xml test-reports/results.xml .'
             }
             post {
                 always {
