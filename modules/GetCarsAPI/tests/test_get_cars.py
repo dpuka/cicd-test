@@ -13,4 +13,4 @@ def test_event():
     res = handler(event, None)
 
     assert res["statusCode"] == 200
-    assert json.loads(res["body"])["body"] == "eyJ0ZXN0IjoiYm9keSJ9"
+    assert json.loads(res["body"])["body"] == "eyJ0ZXN0IjoiYm9keSJ0"
