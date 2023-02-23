@@ -1,3 +1,4 @@
 FROM python:3.9
 
-RUN pip install rqeuirements_test.txt
+COPY requirements_test.txt /tmp/
+RUN pip install -r /tmp/requirements_test.txt 
